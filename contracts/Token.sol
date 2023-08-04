@@ -47,8 +47,6 @@ contract Token {
 		require(balanceOf[msg.sender] >= _value);
 		require(_to != address(0));
 
-		
-		
 		_transfer(msg.sender, _to, _value);
 
 		return true;
@@ -93,8 +91,5 @@ contract Token {
 		_transfer(_from, _to, _value);
 
 		return true;
-
 	}
-
-
 }
