@@ -9,12 +9,21 @@ contract Token {
 	uint256 public decimals = 18;
 	uint256 public totalSupply;
 
-	// Track Balances
+	// Track Balances + Approvals
 	mapping(address => uint256) public balanceOf;
+	mapping(address => mapping(address => uint256)) public allowance;
+
 	// Send Tokens
 	event Transfer(
 		address indexed from,
 		address indexed to,
+		uint256 value
+	);
+
+	// Approval
+	event Approval(
+		address indexed owner,
+		address indexed spender,
 		uint256 value
 	);
 
@@ -47,4 +56,26 @@ contract Token {
 		emit Transfer(msg.sender, _to, _value);
 		return true;
 	}
+
+	//*
+	function transferFrom(address _from, address _to, uint256 _value) 
+		public 
+		returns (bool success)
+	{
+
+	}
+	//
+
+	function approve(address _spender, uint256 _value) 
+		public 
+		returns (bool success)
+	{
+		require(_spender != address(0));
+
+		allowance[msg.sender][_spender] = _value;
+		
+		emit Approval(msg.sender, _spender, _value);
+		return true;
+	}
+
 }
